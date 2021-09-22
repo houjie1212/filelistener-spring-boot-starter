@@ -1,7 +1,7 @@
-package cn.filelistener.config;
+package pers.filelistener.config;
 
-import cn.filelistener.listener.FileListener;
-import cn.filelistener.listener.FileListenerMonitor;
+import pers.filelistener.listener.FileListener;
+import pers.filelistener.listener.FileListenerMonitor;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOCase;
 import org.apache.commons.io.filefilter.FileFilterUtils;
@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableConfigurationProperties(ListenerProperties.class)
-@ComponentScan("cn.filelistener")
+@ComponentScan("pers.filelistener")
 public class MonitorRegisterConfig implements ApplicationContextAware {
 
     private static final Logger log = LoggerFactory.getLogger(MonitorRegisterConfig.class);

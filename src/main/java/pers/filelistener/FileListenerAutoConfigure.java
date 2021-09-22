@@ -1,6 +1,6 @@
-package cn.filelistener;
+package pers.filelistener;
 
-import cn.filelistener.config.MonitorRegisterConfig;
+import pers.filelistener.config.MonitorRegisterConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 

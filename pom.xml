@@ -9,7 +9,7 @@
         <version>2.1.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>cn</groupId>
+    <groupId>pers</groupId>
     <artifactId>filelistener-spring-boot-starter</artifactId>
     <version>1.0-SNAPSHOT</version>
 
