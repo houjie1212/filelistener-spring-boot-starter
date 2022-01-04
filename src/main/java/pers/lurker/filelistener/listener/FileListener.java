@@ -1,4 +1,4 @@
-package pers.filelistener.listener;
+package pers.lurker.filelistener.listener;
 
 import java.io.File;
 import java.util.Collection;

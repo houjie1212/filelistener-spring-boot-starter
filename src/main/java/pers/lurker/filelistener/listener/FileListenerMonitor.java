@@ -1,4 +1,4 @@
-package pers.filelistener.listener;
+package pers.lurker.filelistener.listener;
 
 import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
 import org.apache.commons.io.monitor.FileAlterationObserver;

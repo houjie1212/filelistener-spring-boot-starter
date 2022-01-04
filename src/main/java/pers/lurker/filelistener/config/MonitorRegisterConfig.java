@@ -1,7 +1,7 @@
-package pers.filelistener.config;
+package pers.lurker.filelistener.config;
 
-import pers.filelistener.listener.FileListener;
-import pers.filelistener.listener.FileListenerMonitor;
+import pers.lurker.filelistener.listener.FileListener;
+import pers.lurker.filelistener.listener.FileListenerMonitor;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOCase;
 import org.apache.commons.io.filefilter.FileFilterUtils;
@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableConfigurationProperties(ListenerProperties.class)
-@ComponentScan("pers.filelistener")
+@ComponentScan("pers.lurker.filelistener")
 public class MonitorRegisterConfig implements ApplicationContextAware {
 
     private static final Logger log = LoggerFactory.getLogger(MonitorRegisterConfig.class);

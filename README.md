@@ -4,7 +4,7 @@
 Add dependency.
 ```xml
 <dependency>
-    <groupId>pers</groupId>
+    <groupId>pers.lurker</groupId>
     <artifactId>filelistener-spring-boot-starter</artifactId>
     <version>${version}</version>
 </dependency>
@@ -29,7 +29,7 @@ file:
 ### handler
 
 ```java
-import pers.filelistener.listener.FileListener;
+import pers.lurker.filelistener.listener.FileListener;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
