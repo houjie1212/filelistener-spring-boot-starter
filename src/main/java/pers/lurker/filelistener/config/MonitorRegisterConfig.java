@@ -44,17 +44,23 @@ public class MonitorRegisterConfig implements ApplicationContextAware {
         List<ListenerProperties.Listener> listeners = listenerProperties.getListeners();
         log.debug("listeners.size:{}", listeners.size());
         for (ListenerProperties.Listener listener : listeners) {
-            if (StringUtils.isEmpty(listener.getAddress())) {
-                continue;
-            }
-            File directory = new File(listener.getAddress());
-            if (!directory.exists() || !directory.isDirectory()) {
-                log.warn("加载目录[{}]失败", listener.getAddress());
-                continue;
-            }
+            if (StringUtils.hasText(listener.getAddress())) {
 
-            loadFileOnStart(directory, listener, listenerProperties);
-            startFileListener(directory, listener);
+                for (String address : listener.getAddress().split(",")) {
+                    File directory = new File(address);
+                    if (directory.isFile()) {
+                        log.warn("加载目录[{}]失败", address);
+                        continue;
+                    }
+                    if (!directory.exists()) {
+                        directory.mkdirs();
+                        log.info("{}不存在，已自动创建", address);
+                    }
+
+                    loadFileOnStart(directory, listener, listenerProperties);
+                    startFileListener(directory, listener);
+                }
+            }
         }
     }
 
@@ -66,10 +72,10 @@ public class MonitorRegisterConfig implements ApplicationContextAware {
             String[] extensionsFilter = StringUtils.hasText(listener.getSuffix()) ? listener.getSuffix().split(",") : null;
             Collection<File> files = FileUtils.listFiles(directory, extensionsFilter, listener.isRecursive());
 
-            log.info("开始读取目录[{}](handler:{})", listener.getAddress(), listener.getHandler());
+            log.info("--->开始读取目录[{}](suffix:{}, handler:{})", directory.getAbsolutePath(), listener.getSuffix(), listener.getHandler());
             fileListener.onStart(files, directory);
             fileListener.onStart(files);
-            log.info("读取目录结束[{}](handler:{})", listener.getAddress(), listener.getHandler());
+            log.info("<---读取目录结束[{}](suffix:{}, handler:{})", directory.getAbsolutePath(), listener.getSuffix(), listener.getHandler());
         }
     }
 
@@ -77,7 +83,7 @@ public class MonitorRegisterConfig implements ApplicationContextAware {
         FileAlterationMonitor monitor = getMonitor(directory, listener);
         try {
             monitor.start();
-            log.info("开始监听目录[{}](handler:{})", listener.getAddress(), listener.getHandler());
+            log.info("开始监听目录[{}](suffix:{}, handler:{})", directory.getAbsolutePath(), listener.getSuffix(), listener.getHandler());
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
