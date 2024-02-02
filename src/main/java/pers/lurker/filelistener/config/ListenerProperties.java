@@ -22,6 +22,15 @@ public class ListenerProperties {
         private boolean recursive;
         private Long interval = 5L;
         private Boolean loadOnStart;
+        /**
+         * 启动扫描目录模式，默认0
+         * 0: 立即返回，调用单文件处理方法 FileListener.onStart(File, [...])
+         * 1: 集合返回，按文件创建时间排序，调用文件集合处理方法 FileListener.onStart(Collection<File>, [...])
+         */
+        private int loadOnStartMode;
+        /**正则匹配表达式*/
+        private String matchingConditions;
+        private boolean includeHidden;
         private Map<String, String> properties = new HashMap<>();
 
         public String getAddress() {
@@ -75,6 +84,33 @@ public class ListenerProperties {
 
         public Listener setLoadOnStart(Boolean loadOnStart) {
             this.loadOnStart = loadOnStart;
+            return this;
+        }
+
+        public int getLoadOnStartMode() {
+            return loadOnStartMode;
+        }
+
+        public Listener setLoadOnStartMode(int loadOnStartMode) {
+            this.loadOnStartMode = loadOnStartMode;
+            return this;
+        }
+
+        public String getMatchingConditions() {
+            return matchingConditions;
+        }
+
+        public Listener setMatchingConditions(String matchingConditions) {
+            this.matchingConditions = matchingConditions;
+            return this;
+        }
+
+        public boolean isIncludeHidden() {
+            return includeHidden;
+        }
+
+        public Listener setIncludeHidden(boolean includeHidden) {
+            this.includeHidden = includeHidden;
             return this;
         }
 
